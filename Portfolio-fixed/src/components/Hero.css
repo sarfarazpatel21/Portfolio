@@ -1,0 +1,642 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: clamp(680px, 88vh, 850px);
+
+  overflow: hidden;
+
+  background: var(--color-bg);
+}
+
+
+/* =========================================================
+   SPLINE / CHAIN
+   ========================================================= */
+
+.hero__spline {
+  position: absolute;
+  /*added*/
+  pointer-events: none;
+
+  top: 0;
+  right: -3%;
+  bottom: 0;
+
+  width: 67%;
+  height: 100%;
+
+  z-index: -4;
+
+  /*
+    Slightly larger than its container.
+    This makes the chain feel substantial instead
+    of looking like a small embedded object.
+  */
+  transform: scale(1.08);
+
+  transform-origin: center right;
+
+  filter:
+    brightness(1.12)
+    contrast(1.08)
+    saturate(1.08);
+
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+
+.hero__spline iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+}
+
+
+/* =========================================================
+   SOFT LIGHT AROUND THE CHAIN
+   ========================================================= */
+
+.hero__glow {
+  position: absolute;
+
+  top: 50%;
+  right: 16%;
+
+  width: 560px;
+  height: 560px;
+
+  transform: translate(50%, -50%);
+
+  z-index: -3;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.045) 28%,
+      rgba(255, 255, 255, 0.012) 52%,
+      transparent 72%
+    );
+
+  filter: blur(25px);
+
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   CINEMATIC GRADIENT
+   ========================================================= */
+
+.hero__gradient {
+  position: absolute;
+  inset: 0;
+
+  z-index: -2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-bg) 0%,
+      rgba(8, 8, 8, 0.98) 14%,
+      rgba(8, 8, 8, 0.91) 28%,
+      rgba(8, 8, 8, 0.58) 43%,
+      rgba(8, 8, 8, 0.12) 65%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 8, 8, 0.20) 0%,
+      transparent 35%,
+      rgba(8, 8, 8, 0.45) 100%
+    );
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.hero__inner {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: 1600px;
+
+  margin: 0 auto;
+
+  padding:
+    100px
+    clamp(32px, 5vw, 80px)
+    80px;
+
+  display: flex;
+  align-items: center;
+
+  z-index: 5;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.hero__copy {
+  width: min(620px, 48vw);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 21px;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  font-family: var(--font-body);
+
+  font-size: 12px;
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.62);
+}
+
+
+.hero__status {
+  width: 6px;
+  height: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.055),
+    0 0 14px rgba(255, 255, 255, 0.35);
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.h1-display {
+  margin: 0;
+
+  max-width: 650px;
+
+  font-family: var(--font-display, var(--font-body));
+
+  font-size: clamp(56px, 6vw, 92px);
+
+  font-weight: 500;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.055em;
+
+  color: var(--color-white);
+
+  text-wrap: balance;
+}
+
+
+.h1-display span {
+  color: rgba(255, 255, 255, 0.43);
+
+  /*
+    Very subtle highlight makes the second line
+    feel integrated with the shiny 3D object.
+  */
+  text-shadow:
+    0 0 30px rgba(255, 255, 255, 0.035);
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.hero__summary {
+  width: min(470px, 100%);
+
+  margin: 3px 0 4px;
+
+  font-family: var(--font-body);
+
+  font-size: 15px;
+
+  line-height: 1.65;
+
+  color: rgba(255, 255, 255, 0.57);
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+
+  /*added*/
+  position:relative;
+  z-index:20;
+
+  gap: 10px;
+
+  margin-top: 5px;
+}
+
+
+.btn {
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 17px;
+
+  border-radius: 5px;
+
+  font-family: var(--font-body);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+
+    /*added*/
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+
+.btn--primary {
+  gap: 11px;
+
+  color: var(--color-bg);
+
+  background: var(--color-white);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+
+.btn--primary:hover {
+  box-shadow:
+    0 10px 30px rgba(255, 255, 255, 0.08);
+}
+
+
+.btn__icon {
+  font-size: 16px;
+
+  transition: transform 220ms ease;
+}
+
+
+.btn--primary:hover .btn__icon {
+  transform: translate(2px, -2px);
+}
+
+
+.btn--secondary {
+  color: var(--color-white);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  background: rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+
+.btn--secondary:hover {
+  border-color: rgba(255, 255, 255, 0.36);
+
+  background: rgba(255, 255, 255, 0.075);
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1600px) {
+  .hero__spline {
+    right: -1%;
+
+    width: 64%;
+
+    transform: scale(1.13);
+  }
+
+  .hero__copy {
+    width: 650px;
+  }
+
+  .h1-display {
+    font-size: 96px;
+  }
+
+  .hero__glow {
+    right: 14%;
+
+    width: 680px;
+    height: 680px;
+  }
+}
+
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (max-width: 1400px) and (min-width: 768px) {
+  .hero {
+    height: clamp(650px, 82vh, 760px);
+  }
+
+
+  .hero__inner {
+    padding:
+      95px
+      48px
+      75px;
+  }
+
+
+  .hero__copy {
+    width: min(570px, 51vw);
+
+    gap: 18px;
+  }
+
+
+  .h1-display {
+    font-size: clamp(54px, 5.6vw, 76px);
+  }
+
+
+  .hero__summary {
+    max-width: 430px;
+
+    font-size: 14px;
+  }
+
+
+  .hero__spline {
+    right: -7%;
+
+    width: 67%;
+
+    transform: scale(1.06);
+  }
+
+
+  .hero__glow {
+    right: 12%;
+
+    width: 450px;
+    height: 450px;
+  }
+
+
+  .hero__gradient {
+    background:
+      linear-gradient(
+        90deg,
+        var(--color-bg) 0%,
+        rgba(8, 8, 8, 0.98) 17%,
+        rgba(8, 8, 8, 0.84) 34%,
+        rgba(8, 8, 8, 0.40) 53%,
+        rgba(8, 8, 8, 0.08) 78%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(8, 8, 8, 0.12),
+        transparent 45%,
+        rgba(8, 8, 8, 0.48)
+      );
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .hero {
+    height: 700px;
+  }
+
+
+  .hero__inner {
+    height: 100%;
+
+    padding:
+      100px
+      22px
+      75px;
+
+    align-items: flex-end;
+  }
+
+
+  .hero__copy {
+    width: 100%;
+
+    gap: 17px;
+  }
+
+
+  .hero__eyebrow {
+    font-size: 10px;
+  }
+
+
+  .h1-display {
+    font-size: clamp(44px, 11vw, 62px);
+
+    line-height: 0.96;
+  }
+
+
+  .hero__summary {
+    width: min(440px, 100%);
+
+    font-size: 14px;
+
+    line-height: 1.58;
+  }
+
+
+  /*
+    On smaller screens the chain becomes a visual
+    element above/behind the content.
+  */
+
+  .hero__spline {
+    top: 0;
+    right: -12%;
+
+    width: 115%;
+    height: 70%;
+
+    transform: scale(1.02);
+  }
+
+
+  .hero__glow {
+    top: 32%;
+    right: 25%;
+
+    width: 360px;
+    height: 360px;
+
+    opacity: 0.65;
+  }
+
+
+  .hero__gradient {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(8, 8, 8, 0.02) 0%,
+        rgba(8, 8, 8, 0.08) 23%,
+        rgba(8, 8, 8, 0.42) 45%,
+        rgba(8, 8, 8, 0.90) 70%,
+        var(--color-bg) 100%
+      );
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .hero {
+    height: 650px;
+  }
+
+
+  .hero__inner {
+    padding:
+      95px
+      18px
+      70px;
+  }
+
+
+  .hero__copy {
+    gap: 15px;
+  }
+
+
+  .hero__eyebrow {
+    font-size: 9px;
+  }
+
+
+  .h1-display {
+    font-size: clamp(40px, 12.2vw, 55px);
+
+    letter-spacing: -0.052em;
+  }
+
+
+  .hero__summary {
+    font-size: 13px;
+
+    line-height: 1.55;
+  }
+
+
+  .hero__actions {
+    gap: 8px;
+  }
+
+
+  .btn {
+    min-height: 43px;
+
+    padding: 0 14px;
+
+    font-size: 11px;
+  }
+
+
+  .btn__icon {
+    font-size: 14px;
+  }
+
+
+  .hero__spline {
+    right: -18%;
+
+    width: 125%;
+    height: 66%;
+  }
+
+
+  .hero__glow {
+    top: 29%;
+    right: 22%;
+
+    width: 300px;
+    height: 300px;
+  }
+}
+
